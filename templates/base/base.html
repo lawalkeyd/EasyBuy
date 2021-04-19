@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+{% include 'base/header.html' %}
+<body>
+    {% include 'base/navbar.html'%}
+
+    <div id="carousel-example-1z" class="carousel slide carousel-fade pt-4" data-ride="carousel">
+        {% block content %}
+        
+        {% endblock %}
+    </div>
+
+    {% include 'base/footer.html' %}
+
+    {% include 'base/js.html'%}
+</body>
+</html>
