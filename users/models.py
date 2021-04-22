@@ -13,7 +13,7 @@ class CustomUser(AbstractUser):
     home_address = models.CharField(max_length=200, blank=False) 
     backup_address = models.CharField(max_length=200, blank=True, null=True)
 
-    objects = CustomUserManager
+    objects = CustomUserManager()
     
     def __str__(self):
         return self.first_name

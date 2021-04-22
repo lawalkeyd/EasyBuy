@@ -20,14 +20,14 @@ class CustomUserManager(BaseUserManager):
 
     def create_superuser(self, email, password, **extra_fields):
         """
-        Creates and saves a superuser with the given email, date of
-        birth and password.
+        Create and save a SuperUser with the given email and password.
         """
-        user = self.create_user(
-            email,
-            password=password,
-            date_of_birth=date_of_birth,
-        )
-        user.is_admin = True
-        user.save(using=self._db)
-        return user
+        extra_fields.setdefault('is_staff', True)
+        extra_fields.setdefault('is_superuser', True)
+        extra_fields.setdefault('is_active', True)
+
+        if extra_fields.get('is_staff') is not True:
+            raise ValueError(_('Superuser must have is_staff=True.'))
+        if extra_fields.get('is_superuser') is not True:
+            raise ValueError(_('Superuser must have is_superuser=True.'))
+        return self.create_user(email, password, **extra_fields)
