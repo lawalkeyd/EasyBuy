@@ -173,7 +173,7 @@
               <a class="nav-link" href="#">Shirts</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#" id="sporty">Sport wears</a>
+              <a class="nav-link" href="#">Sport wears</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#">Outwears</a>
@@ -217,8 +217,8 @@
               <!--Card content-->
               <div class="card-body text-center">
                 <!--Category & Title-->
-                <a href="" class="grey-text">
-                  <h5>{{item.ttitle}}</h5>
+                <a href="{% url 'product_item' item.id %}" class="grey-text">
+                  <h5>{{item.title}}</h5>
                 </a>
                 <h5>
                   <strong>
@@ -298,16 +298,7 @@
     </div>
   </main>
   <!--Main layout-->
-  {% block script %}
-<script>
-  let sp = document.getElementById('sporty')
 
- sp.addEventListener('click', function(){
-   date = new Date()
-   alert(`Today is ${date}`)
- })
-</script>
-  {% endblock%}
   {% endblock %}
 
   
