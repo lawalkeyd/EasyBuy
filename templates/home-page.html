@@ -279,7 +279,7 @@
             <a class="page-link" href="#">3</a>
           </li>
           <li class="page-item">
-            <a class="page-link" href="#">4</a>
+            <a class="page-link" href="#" onclick="swap()">4</a>
           </li>
           <li class="page-item">
             <a class="page-link" href="#">5</a>
@@ -298,6 +298,20 @@
     </div>
   </main>
   <!--Main layout-->
+  <script>
+function swap(){
+  'strict'
+  let sw = 3;
+  switch(sw){
+    case 1:
+    console.log('it is incorrect')
+    break
+    case 3:
+    console.log('it is correct')
+  }
+
+}
+  </script>
 
   {% endblock %}
 

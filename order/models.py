@@ -36,7 +36,7 @@ class Order(models.Model):
     ordered = models.BooleanField(default=False)
 
     def __str__(self):
-        return self.user.firstname + ' Order'
+        return self.user.username + ' Order'
 
     def total_price(self):
         total = 0

@@ -6,6 +6,9 @@ from .models import Product
 # Create your views here.
 
 class Home(ListView):
+    """
+    Homepage View, Returns 15 random products
+    """
     template_name = 'home-page.html'
     context_object_name = 'items'
 
@@ -13,6 +16,9 @@ class Home(ListView):
         return Product.objects.all().order_by('?')[:15] 
 
 class ProductItem(DetailView):
+    """
+    Product detail view
+    """
     model = Product     
     template_name='products/product_item.html'
     context_object_name = "details"
