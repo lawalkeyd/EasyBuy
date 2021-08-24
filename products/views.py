@@ -11,9 +11,11 @@ class Home(ListView):
     """
     template_name = 'home-page.html'
     context_object_name = 'items'
+    paginate_by = 2
+    model = Product
 
     def get_queryset(self):
-        return Product.objects.all().order_by('?')[:15] 
+        return Product.objects.all().order_by('?')
 
 class ProductItem(DetailView):
     """
