@@ -17,6 +17,7 @@ def ViewCheckout(request):
 
 @login_required(login_url='account_login')
 def add_to_cart(request):
+    id = None
     if request.method == 'POST':
         id = request.POST['id']
         quantity = request.POST['quantity']
@@ -34,7 +35,7 @@ def add_to_cart(request):
         order = order_qs[0]
         # check if the order item is in the order
         if order.items.filter(item__id=item.id).exists():
-            order_item.quantity += quantity
+            order_item.quantity += int(quantity)
             order_item.save()
             messages.info(request, "This item quantity was updated.")
             return redirect("product_item", slug=id)
@@ -48,7 +49,7 @@ def add_to_cart(request):
             user=request.user, ordered_date=ordered_date)
         order.items.add(order_item)
         messages.info(request, "This item was added to your cart.")
-        return redirect("product-item", id=id)    
+        return redirect("product_item", id=id)    
 
 @login_required(login_url='account_login')
 def remove_from_cart(request):
@@ -57,7 +58,7 @@ def remove_from_cart(request):
     else:
         messages.error(request, 'Could not perform action')
         redirect('home')    
-    item = get_object_or_404(Item, id=id)
+    item = get_object_or_404(OrderItem, id=id)
     order_qs = Order.objects.filter(
         user=request.user,
         ordered=False
