@@ -17,3 +17,10 @@ class CustomUser(AbstractUser):
     
     def __str__(self):
         return self.first_name
+
+    def cart_items(self):
+        items_count = 0
+        user_items = self.order_items.filter(ordered=False)
+        for item in user_items:
+            items_count = items_count + item.quantity
+        return items_count
