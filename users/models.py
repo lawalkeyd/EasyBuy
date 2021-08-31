@@ -22,5 +22,5 @@ class CustomUser(AbstractUser):
         items_count = 0
         user_items = self.order_items.filter(ordered=False)
         for item in user_items:
-            items_count = items_count + item.quantity
+            items_count += item.quantity
         return items_count

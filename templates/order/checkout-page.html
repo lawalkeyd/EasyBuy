@@ -142,8 +142,10 @@
               </div>
 
               <hr>
-              <hr class="mb-4">
-              <button class="btn btn-primary btn-lg btn-block" type="submit">Continue to Payment</button>
+              <hr class="mb-4"></form>
+            <form>
+              <script src="https://js.paystack.co/v1/inline.js"></script>
+              <button class="btn btn-primary btn-lg btn-block" type="button" onsubmit="payWithPaystack()">Continue to Payment</button>
 
             </form>
 
@@ -197,7 +199,6 @@
             </div>
           </form>
           <!-- Promo code -->
-
         </div>
         <!--Grid column-->
 
@@ -207,5 +208,25 @@
     </div>
   </main>
   <!--Main layout-->
+  <script>
+    function payWithPaystack() {
+    var handler = PaystackPop.setup({
+      key: 'pk_test_700e0926438a00e06ca311f2bb40fa0601a22964', // Replace with your public key
+      email: '{{request.user.email}}',
+      amount: {{ order.total_price | safe }} * 100, // the amount value is multiplied by 100 to convert to the lowest currency unit
+      currency: 'NGN', // Use GHS for Ghana Cedis or USD for US Dollars
+      callback: function(response) {
+        //this happens after the payment is completed successfully
+        var reference = response.reference;
+        alert('Payment complete! Reference: ' + reference);
+        // Make an AJAX call to your server with the reference to verify the transaction
+      },
+      onClose: function() {
+        alert('Transaction was not completed, window closed.');
+      },
+    });
+    handler.openIframe();
+  }
+    </script>  
 
 {% endblock %}
